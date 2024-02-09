@@ -2,7 +2,7 @@
 """Define the BaseModel class"""
 import uuid
 import datetime
-from models import storage
+import models
 
 
 class BaseModel:
@@ -29,9 +29,9 @@ class BaseModel:
     def save(self):
         """ updates instance attributes with current datetime"""
         self.updated_at = datetime.datetime.utcnow()
-        from models.engine.file_storage import storage
-        storage.new(self)
-        storage.save()
+        #from models.engine.file_storage import storage
+        models.storage.new(self)
+        models.storage.save()
     def to_dict(self):
         """Convert instance into dict format"""
         obj_dict = self.__dict__.copy()
