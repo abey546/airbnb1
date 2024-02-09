@@ -11,7 +11,7 @@ class BaseModel:
         """Instatntiates a new model"""
         if kwargs:
             for key, value in kwargs.items():
-                if key is not '__class__':
+                if key != '__class__':
                     setattr(self, key, value)
             if 'created_at' in kwargs:
                 self.created_at = datetime.datetime.strptime(kwargs['created_at'], "%Y-%m-%dT%H:%M:%S.%f")        
