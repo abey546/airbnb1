@@ -1,8 +1,14 @@
+#!/usr/bin/python3
+"""Define the BaseModel class"""
 import uuid
 import datetime
+from models import storage
+
 
 class BaseModel:
+    """A base class for all hbnb models"""
     def __init__(self, *args, **kwargs):
+        """Instatntiates a new model"""
         if kwargs:
             for key, value in kwargs.items():
                 if key is not '__class__':
@@ -16,13 +22,17 @@ class BaseModel:
             self.created_at = datetime.datetime.utcnow()
             self.updated_at = datetime.datetime.utcnow()
     def __str__(self):
+        """Returns a string representation of the instance"""
         class_name = self.__class__.__name__
         return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
 
     def save(self):
         """ updates instance attributes with current datetime"""
         self.updated_at = datetime.datetime.utcnow()
+        storage.new(self)
+        storage.save()
     def to_dict(self):
+        """Convert instance into dict format"""
         obj_dict = self.__dict__.copy()
         obj_dict['__class__'] = self.__class__.__name__
         obj_dict['created_at'] = self.created_at.isoformat()
