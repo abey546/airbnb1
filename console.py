@@ -1,6 +1,6 @@
 #!/usr/bin/python3 
 import cmd
-from models.__init__ import storage
+from models.engine.file_storage import storage
 from models.base_model import BaseModel
 class HBNBCommand(cmd.Cmd):
     """Contains the functionality for the HBNB console"""
